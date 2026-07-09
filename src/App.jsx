@@ -1,13 +1,18 @@
-import { useState } from 'react'
-import './App.css'
+import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import "./App.css";
 
 function App() {
-
   return (
     <>
-    <h1>Write Right!</h1>
+      <Routes>
+        {/*routes to new pages go here, example
+      <Route path="/" element={<Home />} />
+      <Route path="/journal" element={<Journal />} /> */}
+      </Routes>
+      <h1>WriteRight</h1>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
