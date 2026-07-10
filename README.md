@@ -1,16 +1,41 @@
-# React + Vite
+# ✍️ WriteRight FE
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+**WriteRight** is an AI-powered language learning journal that helps learners improve their writing by analyzing journal entries, correcting grammar, and explaining mistakes in a way that's easy to understand.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features
 
-## React Compiler
+- 📝 Write journal entries in your target language
+- 🤖 AI-powered grammar and spelling corrections
+- 💡 Explanations for why corrections were made
+- 📚 Learn from your mistakes as you write
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the Oxlint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+### Frontend
+- React
+- Vite
+---
+
+# 🚀 Getting Started
+
+## Frontend Setup
+
+Navigate to the frontend project.
+
+```bash
+npm install
+npm install react-router-dom
+npm run dev
+```
+
+The frontend will start in development mode.
+
+---
+
+## 🎯 Project Goal
+
+WriteRight is designed to make language practice more effective by giving learners immediate, personalized feedback on their writing. Instead of only correcting mistakes, the app explains *why* changes were made so users can build lasting language skills.
