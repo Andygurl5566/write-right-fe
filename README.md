@@ -29,6 +29,8 @@ Navigate to the frontend project.
 ```bash
 npm install
 npm install react-router-dom
+npm install @tanstack/react-query
+npm install @tanstack/react-query-devtools [developers]
 npm run dev
 ```
 
