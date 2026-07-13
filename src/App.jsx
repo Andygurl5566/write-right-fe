@@ -17,7 +17,7 @@ function App() {
   async function handleCorrect() {
     console.log("Button clicked");
 
-    const response = await fetch("http://localhost:8000/correct", {
+    const response = await fetch("http://localhost:8000/journal/analyze", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,40 +42,37 @@ function App() {
       <Route path="/journal" element={<Journal />} /> */}
       {/* </Routes> */}
 
-        {/* Header */}
-        <h1>WriteRight</h1>
+      {/* Header */}
+      <h1>WriteRight</h1>
 
-        {/* Text box */}
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          placeholder="Write something..."
-        />
+      {/* Text box */}
+      <textarea
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="Write something..."
+      />
 
-        {/* Button */}
-        <button onClick={handleCorrect}>
-          Check for Mistakes
-        </button>
+      {/* Button */}
+      <button onClick={handleCorrect}>Check for Mistakes</button>
 
-        {/* Correction results */}
-        {result && (
-          <div>
-            <h2>Corrected Text</h2>
-            <p>{result.text}</p>
+      {/* Correction results */}
+      {result && (
+        <div>
+          <h2>Corrected Text</h2>
+          <p>{result.text}</p>
 
-            <h2>Mistakes</h2>
+          <h2>Mistakes</h2>
 
-            {result.mistakes.map((mistake, index) => (
-              <div key={index}>
-                <p>
-                  {mistake.original} → {mistake.corrected}
-                </p>
-                <p>{mistake.explanation}</p>
-              </div>
-            ))}
-          </div>
-        )}
-
+          {result.mistakes.map((mistake, index) => (
+            <div key={index}>
+              <p>
+                {mistake.original} → {mistake.corrected}
+              </p>
+              <p>{mistake.explanation}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
