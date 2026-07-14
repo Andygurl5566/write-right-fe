@@ -1,6 +1,8 @@
+import Tooltip from "./Tooltip"
 
 
-function Correction() {
+//returns a single correction
+function Correction(original, correction, explanation) {
   return <></>;
 }
 
