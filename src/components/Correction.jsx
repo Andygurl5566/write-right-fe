@@ -9,9 +9,9 @@ function Correction({ mistake }) {
     <span className="correction-wrapper">
       <span className="incorrect-text">{mistake.original}</span>
 
-      <span className="corrected-text">{mistake.corrected_text}</span>
+      <span className="corrected-text">{mistake.corrected}</span>
 
-      <CorrectionTooltip>{mistake.explanation}</CorrectionTooltip>
+      <CorrectionTooltip mistake={mistake}></CorrectionTooltip>
     </span>
   );
 }
