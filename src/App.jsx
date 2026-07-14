@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
+import FlashcardStudy from "./components/FlashcardStudy";
 import "./App.css";
 
 // CORS Test| Makes a call to the backend endpoint "/" in write-right-be/main.py
@@ -13,6 +14,7 @@ function App() {
 
   const [text, setText] = useState("");
   const [result, setResult] = useState(null);
+  const [showFlashcards, setShowFlashcards] = useState(false);
 
   async function handleCorrect() {
     console.log("Button clicked");
@@ -32,6 +34,7 @@ function App() {
     console.log("Backend response:", data);
 
     setResult(data);
+    setShowFlashcards(false);
   }
 
   return (
@@ -66,11 +69,21 @@ function App() {
           {result.mistakes.map((mistake, index) => (
             <div key={index}>
               <p>
-                {mistake.original} → {mistake.corrected}
+              {mistake.original} → {mistake.corrected_text}
               </p>
               <p>{mistake.explanation}</p>
             </div>
           ))}
+         {!showFlashcards ? (
+          <button
+            className="conquer-button"
+            onClick={() => setShowFlashcards(true)}
+          >
+            ⚔️ Conquer Cards
+          </button>
+        ) : (
+          <FlashcardStudy mistakes={result.mistakes} />
+        )}
         </div>
       )}
     </div>
