@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
-import { handleCorrect } from "../services/api.js";
 
-function JournalEditor() {
-  const [text, setText] = useState("");
-  const [result, setResult] = useState(null);
+// The JournalEditor component is a simple text area where the user can write their journal entry. It also has a button to submit the journal entry for analysis. The component takes in the following props:
+// - text: The current text of the journal entry.
+// - setText: A function to update the text of the journal entry.
+// - onAnalyze: A function to call when the user clicks the "Check Writing" button.
+// - loading: A boolean indicating whether the analysis is currently loading.
+// - error: An error message to display if there was an error with the analysis.
 
+function JournalEditor({ text, setText, onAnalyze, loading, error }) {
   return (
     <>
       <textarea
@@ -13,11 +16,9 @@ function JournalEditor() {
         placeholder="Write something..."
       />
       <button
-        onClick={async () => {
-          const data = await handleCorrect(text);
-          setResult(data);
-          console.log("Backend response:", data);
-        }}
+        onClick={onAnalyze}
+        disabled={loading}
+        style={{ marginTop: "10px" }}
       >
         Check Writing
       </button>

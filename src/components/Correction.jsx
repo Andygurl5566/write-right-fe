@@ -1,4 +1,4 @@
-import Tooltip from "./Tooltip"
+import CorrectionTooltip from "./CorrectionTooltip"
 
 
 //returns a single correction
