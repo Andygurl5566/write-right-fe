@@ -17,7 +17,7 @@ function App() {
   async function handleCorrect() {
     console.log("Button clicked");
 
-    const response = await fetch("http://localhost:8000/correct", {
+    const response = await fetch("http://localhost:8000/journal/analyze", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
