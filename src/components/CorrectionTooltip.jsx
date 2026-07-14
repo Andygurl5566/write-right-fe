@@ -5,7 +5,7 @@ function CorrectionTooltip({ children }) {
   return (
     <div className="tooltip-container">
       <div className="tooltip-content">{children}</div>
-      <button>Create Flashcard</button>
+      {/* <button>Create Flashcard</button> */}
     </div>
   );
 }

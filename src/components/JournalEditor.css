@@ -1,0 +1,139 @@
+.journal-editor {
+
+    max-width: 900px;
+
+    margin: 50px auto;
+
+    padding: 30px;
+
+}
+
+
+.journal-editor h1 {
+
+    margin-bottom: 8px;
+
+    font-size: 38px;
+
+    font-weight: 700;
+
+}
+
+
+.editor-subtitle {
+
+    margin-bottom: 30px;
+
+    color: #666;
+
+    font-size: 18px;
+
+}
+
+
+.journal-textarea {
+
+    width: 100%;
+
+    min-height: 400px;
+
+    padding: 24px;
+
+    font-size: 20px;
+
+    line-height: 1.7;
+
+    border: 1px solid #ddd;
+
+    border-radius: 14px;
+
+    resize: vertical;
+
+    outline: none;
+
+    transition: 0.2s;
+
+    box-sizing: border-box;
+
+}
+
+
+.journal-textarea:focus {
+
+    border-color: #3b82f6;
+
+    box-shadow: 0 0 0 4px rgba(59,130,246,.15);
+
+}
+
+
+.editor-footer {
+
+    margin-top: 18px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.character-count {
+
+    color: #888;
+
+    font-size: 14px;
+
+}
+
+
+.analyze-button {
+
+    border: none;
+
+    border-radius: 10px;
+
+    padding: 12px 22px;
+
+    background: #3b82f6;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+
+.analyze-button:hover:not(:disabled) {
+
+    background: #2563eb;
+
+}
+
+
+.analyze-button:disabled {
+
+    background: #9ca3af;
+
+    cursor: not-allowed;
+
+}
+
+
+.error-message {
+
+    margin-top: 18px;
+
+    color: #dc2626;
+
+    font-weight: 500;
+
+}

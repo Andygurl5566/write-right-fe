@@ -1,28 +1,35 @@
-import { useState, useEffect } from "react";
-
-// The JournalEditor component is a simple text area where the user can write their journal entry. It also has a button to submit the journal entry for analysis. The component takes in the following props:
-// - text: The current text of the journal entry.
-// - setText: A function to update the text of the journal entry.
-// - onAnalyze: A function to call when the user clicks the "Check Writing" button.
-// - loading: A boolean indicating whether the analysis is currently loading.
-// - error: An error message to display if there was an error with the analysis.
+import "./JournalEditor.css";
 
 function JournalEditor({ text, setText, onAnalyze, loading, error }) {
   return (
-    <>
+    <div className="journal-editor">
+      <h1>WriteRight</h1>
+
+      <p className="editor-subtitle">
+        Practice writing in your target language.
+      </p>
+
       <textarea
+        className="journal-textarea"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Write something..."
+        placeholder="Write about your day..."
       />
-      <button
-        onClick={onAnalyze}
-        disabled={loading}
-        style={{ marginTop: "10px" }}
-      >
-        Check Writing
-      </button>
-    </>
+
+      <div className="editor-footer">
+        <span className="character-count">{text.length} characters</span>
+
+        <button
+          className="analyze-button"
+          onClick={onAnalyze}
+          disabled={loading}
+        >
+          {loading ? "Analyzing..." : "Analyze Writing"}
+        </button>
+      </div>
+
+      {error && <p className="error-message">{error}</p>}
+    </div>
   );
 }
 
