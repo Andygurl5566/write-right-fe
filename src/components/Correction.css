@@ -1,0 +1,67 @@
+.correction-wrapper {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    position: relative;
+
+    cursor: pointer;
+}
+
+
+/*
+    The original mistake
+
+    Example:
+    Hww
+*/
+.incorrect-text {
+
+    color: #d64545;
+
+    text-decoration: line-through;
+
+    text-decoration-thickness: 2px;
+
+    background-color: #ffe7e7;
+
+    padding: 2px 5px;
+
+    border-radius: 5px;
+}
+
+
+/*
+    The AI suggestion
+
+    Example:
+    How
+*/
+.corrected-text {
+
+    color: #218739;
+
+    font-weight: 600;
+
+    background-color: #e7f7ea;
+
+    padding: 2px 5px;
+
+    border-radius: 5px;
+}
+
+
+/*
+    Small animation when hovering
+*/
+.correction-wrapper:hover {
+
+    transform: translateY(-1px);
+
+    transition: transform 0.15s ease;
+}
+.correction-wrapper {
+    position: relative;
+}

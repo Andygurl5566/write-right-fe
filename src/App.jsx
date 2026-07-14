@@ -1,78 +1,73 @@
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./App.css";
+import Write from "./pages/Write.jsx";
+import { handleCorrectJournal } from "./services/api.js";
 
-// CORS Test| Makes a call to the backend endpoint "/" in write-right-be/main.py
 function App() {
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000")
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.error(error));
-  }, []);
+  // Seting variables in the App component so the entire application can access them.
+  // This is a temporary solution until we implement a more robust state management system.
 
-  const [text, setText] = useState("");
-  const [result, setResult] = useState(null);
+  // The users journal text
+  const [journalText, setJournalText] = useState("");
 
-  async function handleCorrect() {
-    console.log("Button clicked");
+  // The analysis of the users journal text
+  const [corrections, setCorrections] = useState([]);
 
-    const response = await fetch("http://localhost:8000/journal/analyze", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        text: text,
-      }),
-    });
+  // The users current review mode
+  const [reviewMode, setReviewMode] = useState(false);
 
-    const data = await response.json();
-    
-    console.log("Backend response:", data);
+  // Loading spinner
+  const [loading, setLoading] = useState(false);
 
-    setResult(data);
+  // Api error state to handle errors from the backend
+  const [apiError, setApiError] = useState(null);
+
+  // Helper functions ----------------------------------------------
+
+  // Function to handle the journal analysis. Call the backend (handleCorrectJournal func) and sets the corrections state with the response.
+  async function analyzeJournal() {
+    // Prevent empty submissions
+    if (!journalText.trim()) {
+      setApiError("Please enter some text first.");
+      return;
+    }
+    setLoading(true);
+    setApiError("");
+
+    try {
+      const response = await handleCorrectJournal(journalText);
+      console.log("Backend response:", response);
+
+      setCorrections(response.mistakes);
+      setJournalText(response.text);
+      setReviewMode(true);
+    } catch (err) {
+      console.error(err);
+      setApiError("Something went wrong while analyzing your journal.");
+    } finally {
+      setLoading(false);
+    }
   }
 
+  function returnToEditor() {
+    setReviewMode(false);
+  }
+
+  // --------------------------------------------------------------
+
   return (
-    <div>
-      {/* <Routes> */}
-      {/*routes to new pages go here, example
-      <Route path="/" element={<Home />} />
-      <Route path="/journal" element={<Journal />} /> */}
-      {/* </Routes> */}
-
-      {/* Header */}
-      <h1>WriteRight</h1>
-
-      {/* Text box */}
-      <textarea
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Write something..."
+    <div className="App">
+      <Write
+        text={journalText}
+        setText={setJournalText}
+        onAnalyze={analyzeJournal}
+        loading={loading}
+        corrections={corrections}
+        onBack={returnToEditor}
+        error={apiError}
+        reviewMode={reviewMode}
       />
-
-      {/* Button */}
-      <button onClick={handleCorrect}>Check for Mistakes</button>
-
-      {/* Correction results */}
-      {result && (
-        <div>
-          <h2>Corrected Text</h2>
-          <p>{result.text}</p>
-
-          <h2>Mistakes</h2>
-
-          {result.mistakes.map((mistake, index) => (
-            <div key={index}>
-              <p>
-                {mistake.original} → {mistake.corrected}
-              </p>
-              <p>{mistake.explanation}</p>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
