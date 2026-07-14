@@ -1,0 +1,73 @@
+.tooltip-container {
+
+    position: absolute;
+
+    bottom: 120%;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 260px;
+
+    padding: 12px 14px;
+
+    background: #222;
+
+    color: white;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: 
+        opacity 0.2s ease,
+        transform 0.2s ease;
+
+    z-index: 100;
+
+}
+
+
+/*
+    Little arrow under tooltip
+*/
+.tooltip-container::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 100%;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    border-width: 6px;
+
+    border-style: solid;
+
+    border-color: #222 transparent transparent transparent;
+}
+
+
+/*
+    Show tooltip when hovering correction
+*/
+.correction-wrapper:hover .tooltip-container {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translateX(-50%)
+        translateY(-5px);
+}
