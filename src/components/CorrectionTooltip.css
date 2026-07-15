@@ -4,12 +4,13 @@
     top: calc(100% + 12px);
     left: 50%;
 
-   width: 300px;
+    width: 300px;
 
     background: white;
     border-radius: 14px;
     border: 1px solid #e5e7eb;
     box-shadow: 0 12px 30px rgba(0,0,0,.12);
+    overflow: visible;
 
 
     transform: translateX(-50%);
@@ -49,16 +50,16 @@
 
     display: flex;
 
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .flashcard-button {
 
-    background: #2563eb;
+    background: #ffffff;
 
-    color: white;
+    color: rgb(0, 0, 0);
 
-    border: none;
+    border: 2px solid #e5e7eb;
 
     border-radius: 8px;
 
@@ -103,8 +104,12 @@
 .tooltip-original {
 
     text-decoration: line-through;
-
     color: #dc2626;
+}
+.tooltip-incorrect-container {
+    display: flex;         
+    gap: 10px;            
+    align-items: center;
 }
 
 .tooltip-arrow {
@@ -119,6 +124,11 @@
     color: #16a34a;
 
     font-weight: 600;
+}
+.tooltip-corrected-container {
+    display: flex;         
+    gap: 10px;            
+    align-items: center;
 }
 
 .tooltip-explanation {
@@ -146,4 +156,47 @@
 .corrected-text:hover {
 
     transform: translateY(-1px);
+}
+
+.tooltip-container::after {
+    content: "";
+
+    position: absolute;
+
+    top: -10px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 0;
+    height: 0;
+
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #f8fafc;
+
+    z-index: 2;
+}
+
+
+.tooltip-container::before {
+    content: "";
+
+    position: absolute;
+
+    top: -11px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 0;
+    height: 0;
+
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    border-bottom: 11px solid #e5e7eb;
+
+    z-index: 1;
 }

@@ -1,7 +1,10 @@
 import "./CorrectionTooltip.css";
+import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import Button from '@mui/material/Button';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 function CorrectionTooltip({ mistake, onCreateFlashcard }) {
-  console.log("mistakes:", mistake);
   return (
     <div className="tooltip-container">
       <div className="tooltip-header">
@@ -12,11 +15,14 @@ function CorrectionTooltip({ mistake, onCreateFlashcard }) {
 
       <div className="tooltip-body">
         <div className="tooltip-preview">
-          <span className="tooltip-original">{mistake.original}</span>
-
-          <span className="tooltip-arrow">→</span>
-
-          <span className="tooltip-corrected">{mistake.corrected}</span>
+          <div className="tooltip-incorrect-container">
+            <CloseOutlinedIcon className="close-icon" sx={{ color: "red" }} />
+            <span className="tooltip-original">{mistake.original}</span>
+          </div>
+          <div className="tooltip-corrected-container">
+            <CheckOutlinedIcon className="check-icon" sx={{ color: "green" }} />
+            <span className="tooltip-corrected">{mistake.corrected}</span>
+          </div>
         </div>
 
         <p className="tooltip-explanation">{mistake.explanation}</p>
@@ -24,12 +30,12 @@ function CorrectionTooltip({ mistake, onCreateFlashcard }) {
 
       <div className="tooltip-footer">
         <button
-        type="button"
-        className="flashcard-button"
-        onClick={() => onCreateFlashcard(mistake)}
-      >
-        📚 Create Flashcard
-      </button>
+          type="button"
+          className="flashcard-button"
+          onClick={() => onCreateFlashcard(mistake)}
+        >
+          📚 Create Flashcard
+        </button>
       </div>
     </div>
   );
