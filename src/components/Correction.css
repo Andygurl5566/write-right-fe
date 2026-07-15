@@ -1,12 +1,6 @@
 .correction-wrapper {
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 8px;
-
     position: relative;
-
+    display: inline-block;
     cursor: pointer;
 }
 

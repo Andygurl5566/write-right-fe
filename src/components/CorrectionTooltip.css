@@ -11,14 +11,13 @@
     border: 1px solid #e5e7eb;
     box-shadow: 0 12px 30px rgba(0,0,0,.12);
 
-    opacity: 0;
-    visibility: hidden;
 
     transform: translateX(-50%);
 
     transition:
         opacity .2s ease,
         transform .2s ease;
+        z-index: 100;
 }
 
 .tooltip-header {
@@ -130,10 +129,21 @@
 
     font-size: 15px;
 }
-.correction-wrapper:hover .tooltip-container {
-    opacity: 1;
-    visibility: visible;
-    transform:
-        translateX(-50%)
-        translateY(-5px);
+.correction-wrapper {
+
+    position: relative;
+
+    cursor: pointer;
+}
+
+.incorrect-text,
+.corrected-text {
+
+    transition: .2s;
+}
+
+.incorrect-text:hover,
+.corrected-text:hover {
+
+    transform: translateY(-1px);
 }
