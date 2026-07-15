@@ -4,7 +4,7 @@ import "./JournalText.css";
 
 
 
-function JournalText({ text, corrections, onBack }) {
+function JournalText({ text, corrections, onBack, onCreateFlashcard }) {
 
   function renderTextWithCorrections() {
     // If there are no mistakes, just display the text
@@ -45,7 +45,13 @@ function JournalText({ text, corrections, onBack }) {
 
                 Hww → How
             */
-      parts.push(<Correction key={`mistake-${index}`} mistake={mistake} />);
+          parts.push(
+            <Correction
+              key={`mistake-${index}`}
+              mistake={mistake}
+              onCreateFlashcard={onCreateFlashcard}
+            />,
+          );
 
       /*
                 Move our pointer forward
