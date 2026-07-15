@@ -16,7 +16,7 @@ function CorrectionTooltip({ mistake, onCreateFlashcard }) {
 
           <span className="tooltip-arrow">→</span>
 
-          <span className="tooltip-corrected">{mistake.corrected_text}</span>
+          <span className="tooltip-corrected">{mistake.corrected}</span>
         </div>
 
         <p className="tooltip-explanation">{mistake.explanation}</p>

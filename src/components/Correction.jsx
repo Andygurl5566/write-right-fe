@@ -7,7 +7,7 @@ function Correction({ mistake, onCreateFlashcard }) {
       <span className="incorrect-text">{mistake.original}</span>
 
       <span className="corrected-text">
-        {mistake.corrected_text}
+        {mistake.corrected}
       </span>
 
       <CorrectionTooltip
