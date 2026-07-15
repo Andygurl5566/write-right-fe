@@ -26,7 +26,7 @@ function Correction({ mistake, onCreateFlashcard, isOpen, onClick, onClose }) {
   return (
     <span
       ref={wrapperRef}
-      className="correction-wrapper"
+      className={`correction-wrapper ${isOpen ? "active" : ""}`}
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();

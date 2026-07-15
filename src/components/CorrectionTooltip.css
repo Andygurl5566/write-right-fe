@@ -10,15 +10,16 @@
     border-radius: 14px;
     border: 1px solid #e5e7eb;
     box-shadow: 0 12px 30px rgba(0,0,0,.12);
-    overflow: visible;
 
+    overflow: visible;
 
     transform: translateX(-50%);
 
     transition:
         opacity .2s ease,
         transform .2s ease;
-        z-index: 100;
+
+    z-index: 99999;
 }
 
 .tooltip-header {
@@ -86,6 +87,12 @@
     background: #fef3c7;
     color: #92400e;
 }
+
+.category-badge.other {
+    background: #d8def2;
+    color: #504d50;
+}
+
 .tooltip-correction {
 
     display: flex;
@@ -158,6 +165,8 @@
     transform: translateY(-1px);
 }
 
+/* create the illusion of a tale for the tooltip */
+
 .tooltip-container::after {
     content: "";
 
@@ -179,7 +188,6 @@
     z-index: 2;
 }
 
-
 .tooltip-container::before {
     content: "";
 
@@ -199,4 +207,12 @@
     border-bottom: 11px solid #e5e7eb;
 
     z-index: 1;
+}
+
+.close-icon {
+    color: #dc2626;
+}
+
+.check-icon {
+    color: #16a34a;
 }
