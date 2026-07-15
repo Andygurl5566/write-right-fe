@@ -40,7 +40,6 @@ function App() {
       console.log("Backend response:", response);
 
       setCorrections(response.mistakes);
-      setJournalText(response.text);
       setReviewMode(true);
     } catch (err) {
       console.error(err);
