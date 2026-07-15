@@ -1,6 +1,6 @@
 import "./CorrectionTooltip.css";
 
-function CorrectionTooltip({ mistake }) {
+function CorrectionTooltip({ mistake, onCreateFlashcard }) {
   console.log("mistakes:", mistake);
   return (
     <div className="tooltip-container">
@@ -16,14 +16,20 @@ function CorrectionTooltip({ mistake }) {
 
           <span className="tooltip-arrow">→</span>
 
-          <span className="tooltip-corrected">{mistake.corrected}</span>
+          <span className="tooltip-corrected">{mistake.corrected_text}</span>
         </div>
 
         <p className="tooltip-explanation">{mistake.explanation}</p>
       </div>
 
       <div className="tooltip-footer">
-        <button className="flashcard-button">📚 Create Flashcard</button>
+        <button
+        type="button"
+        className="flashcard-button"
+        onClick={() => onCreateFlashcard(mistake)}
+      >
+        📚 Create Flashcard
+      </button>
       </div>
     </div>
   );

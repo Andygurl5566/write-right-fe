@@ -70,18 +70,21 @@ function FlashcardStudy({ mistakes }) {
     setFeedback(null);
   }
 
-  function normalizeText(value) {
+  function normalizeText(value = "") {
     return value
       .trim()
       .toLocaleLowerCase()
       .replace(/[.,!?;:]/g, "");
-  }
+    }
 
   function handleSubmitAttempt(event) {
     event.preventDefault();
 
     const userAnswer = normalizeText(attempt);
-    const correctAnswer = normalizeText(currentCard.corrected_text);
+    const correctedText =
+      currentCard.corrected_text ?? currentCard.corrected ?? "";
+
+    const correctAnswer = normalizeText(correctedText);
 
     if (userAnswer === correctAnswer) {
       setFeedback("correct");
@@ -153,7 +156,9 @@ function FlashcardStudy({ mistakes }) {
         ) : (
           <div className="flashcard-answer">
             <p className="flashcard-label">Correct version:</p>
-            <h3>{currentCard.corrected_text}</h3>
+            <h3>
+             {currentCard.corrected_text ?? currentCard.corrected}
+            </h3>
             <p>{currentCard.explanation}</p>
 
             <div className="flashcard-actions">
