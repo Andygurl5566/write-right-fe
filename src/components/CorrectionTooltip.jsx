@@ -58,7 +58,7 @@ function CorrectionTooltip({ mistake, onCreateFlashcard }) {
           className="flashcard-button"
           onClick={() => onCreateFlashcard(mistake)}
         >
-          📚 Create Flashcard
+          Create Flashcard
         </button>
       </div>
     </div>
