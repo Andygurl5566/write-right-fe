@@ -1,3 +1,4 @@
+import { useState } from "react";
 import JournalEditor from "../components/JournalEditor.jsx";
 import JournalText from "../components/JournalText.jsx";
 import FlashcardStudy from "../components/FlashcardStudy.jsx";
@@ -12,6 +13,24 @@ function Write({
   error,
   reviewMode,
 }) {
+  const [flashcards, setFlashcards] = useState([]);
+
+  function handleCreateFlashcard(mistake) {
+    setFlashcards((currentCards) => {
+      const alreadyExists = currentCards.some(
+        (card) =>
+          card.original === mistake.original &&
+          card.corrected_text === mistake.corrected_text,
+      );
+
+      if (alreadyExists) {
+        return currentCards;
+      }
+
+      return [...currentCards, mistake];
+    });
+  }
+
   return (
     <>
       {!reviewMode ? (
@@ -28,9 +47,10 @@ function Write({
             text={text}
             corrections={corrections}
             onBack={onBack}
+            onCreateFlashcard={handleCreateFlashcard}
           />
 
-          <FlashcardStudy mistakes={corrections} />
+          <FlashcardStudy mistakes={flashcards} />
         </>
       )}
     </>

@@ -8,6 +8,7 @@ function FlashcardStudy({ mistakes }) {
   const [masteredCount, setMasteredCount] = useState(0);
   const [attempt, setAttempt] = useState("");
   const [feedback, setFeedback] = useState(null);
+  const [studyStarted, setStudyStarted] = useState(false);
 
   useEffect(() => {
     setQueue(mistakes ?? []);
@@ -16,11 +17,26 @@ function FlashcardStudy({ mistakes }) {
     setMasteredCount(0);
     setAttempt("");
     setFeedback(null);
+    setStudyStarted(false);
   }, [mistakes]);
 
   if (!mistakes?.length) {
     return null;
   }
+
+  if (!studyStarted) {
+  return (
+    <section className="flashcard-study">
+      <button
+        type="button"
+        onClick={() => setStudyStarted(true)}
+      >
+        ⚔️ Conquer {mistakes.length}{" "}
+        {mistakes.length === 1 ? "Card" : "Cards"}
+      </button>
+    </section>
+  );
+}
 
   if (queue.length === 0) {
     return (
