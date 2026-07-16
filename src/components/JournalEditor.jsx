@@ -3,8 +3,6 @@ import "./JournalEditor.css";
 function JournalEditor({ text, setText, onAnalyze, loading, error }) {
   return (
     <div className="journal-editor">
-      <h1>WriteRight</h1>
-
       <p className="editor-subtitle">
         Practice writing in your target language.
       </p>
