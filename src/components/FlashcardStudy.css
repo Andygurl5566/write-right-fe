@@ -1,7 +1,12 @@
+.answer-feedback-incorrect-feedback{
+  color: #991b1b;
+}
 .flashcard-study {
   width: min(100%, 680px);
   margin: 2rem auto;
   padding: 1.5rem;
+  flex: auto;
+  align-items: center;
 }
 
 .study-stats {
@@ -109,4 +114,11 @@ input {
   .flashcard-actions {
     flex-direction: column;
   }
+}
+
+.reveal-button{
+  display: flex;
+  padding-top: 15px;
+  flex-direction: column;
+  gap: 10px
 }
