@@ -4,10 +4,10 @@
     gap: 8px;
     position: relative;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 100;
 }
 .correction-wrapper.active {
-    z-index: 9999;
+    z-index: 800;
 }
 /*
     The original mistake

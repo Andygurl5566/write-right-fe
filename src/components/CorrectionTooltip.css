@@ -19,7 +19,7 @@
         opacity .2s ease,
         transform .2s ease;
 
-    z-index: 99999;
+    z-index: 9999;
 }
 
 .tooltip-header {

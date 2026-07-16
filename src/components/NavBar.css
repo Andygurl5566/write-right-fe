@@ -1,5 +1,6 @@
 .navbar {
     height: 72px;
+    position: sticky;
 
     display: flex;
     justify-content: space-between;
@@ -11,10 +12,12 @@
 
     border-bottom: 1px solid #e5e7eb;
 
-    position: sticky;
+   
     top: 0;
 
-    z-index: 1000;
+    z-index: 99999999;
+    isolation: isolate;
+    
 }
 
 /* ---------- Left ---------- */
@@ -42,7 +45,7 @@
 
 /* ---------- Center ---------- */
 
-.navbar-language {
+/* .navbar-links {
 
     display: flex;
     align-items: center;
@@ -57,9 +60,9 @@
     cursor: pointer;
 
     transition: .2s;
-}
+} */
 
-.navbar-language:hover {
+.navbar-links:hover {
 
     background: #f9fafb;
 }
