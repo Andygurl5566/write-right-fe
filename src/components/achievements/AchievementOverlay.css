@@ -1,0 +1,124 @@
+.achievement-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  pointer-events: none;
+  background: rgba(15, 23, 42, 0.2);
+  backdrop-filter: blur(3px);
+  animation: overlayFade 3.5s ease forwards;
+}
+
+.achievement-card {
+  width: min(100%, 430px);
+  padding: 2rem;
+  border: 2px solid rgba(250, 204, 21, 0.78);
+  border-radius: 24px;
+  text-align: center;
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(250, 204, 21, 0.24),
+      transparent 45%
+    ),
+    linear-gradient(145deg, #ffffff, #eff6ff);
+  box-shadow:
+    0 24px 70px rgba(15, 23, 42, 0.3),
+    0 0 35px rgba(250, 204, 21, 0.36);
+  animation: achievementEnter 0.55s ease-out;
+}
+
+.achievement-icon {
+  font-size: 4rem;
+  line-height: 1;
+  animation: trophyPulse 0.9s ease-in-out infinite alternate;
+}
+
+.achievement-label {
+  margin: 1rem 0 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #2563eb;
+}
+
+.achievement-card h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  color: #172554;
+}
+
+.achievement-card h3 {
+  margin: 0.75rem 0 0.35rem;
+  color: #166534;
+}
+
+.achievement-card p {
+  margin: 0.35rem 0 0;
+  color: #475569;
+}
+
+.achievement-reward {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 800;
+  color: #854d0e;
+  background: #fef3c7;
+}
+
+@keyframes achievementEnter {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.82);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes trophyPulse {
+  from {
+    transform: scale(1) rotate(-2deg);
+  }
+
+  to {
+    transform: scale(1.12) rotate(2deg);
+  }
+}
+
+@keyframes overlayFade {
+  0%,
+  78% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .achievement-card {
+    padding: 1.5rem;
+    border-radius: 20px;
+  }
+
+  .achievement-icon {
+    font-size: 3.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .achievement-overlay,
+  .achievement-card,
+  .achievement-icon {
+    animation: none;
+  }
+}

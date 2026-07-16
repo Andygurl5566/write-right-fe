@@ -4,6 +4,8 @@ import "./App.css";
 import Write from "./pages/Write.jsx";
 import TopNav from "./components/NavBar.jsx";
 import { handleCorrectJournal } from "./services/api.js";
+import { celebrate } from "./utils/celebrate";
+import AchievementOverlay from "./components/achievements/AchievementOverlay";
 
 function App() {
   // Seting variables in the App component so the entire application can access them.
@@ -24,6 +26,9 @@ function App() {
   // Api error state to handle errors from the backend
   const [apiError, setApiError] = useState(null);
 
+  // Win condition celebration
+  const [achievement, setAchievement] = useState(null);
+
   // Helper functions ----------------------------------------------
 
   // Function to handle the journal analysis. Call the backend (handleCorrectJournal func) and sets the corrections state with the response.
@@ -42,6 +47,21 @@ function App() {
 
       setCorrections(response.mistakes);
       setReviewMode(true);
+
+      if (response.mistakes.length === 0) {
+        celebrate();
+
+        setAchievement({
+          title: "🏆 JOURNAL MASTER",
+          subtitle: "Perfect Journal",
+          description: "No corrections were needed!",
+        });
+
+        setTimeout(() => {
+          setAchievement(null);
+        }, 3500);
+      }
+
     } catch (err) {
       console.error(err);
       setApiError("Something went wrong while analyzing your journal.");
@@ -59,6 +79,7 @@ function App() {
   return (
     <div className="App">
       <TopNav />
+      <AchievementOverlay achievement={achievement} />
       <Write
         text={journalText}
         setText={setJournalText}
