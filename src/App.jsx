@@ -6,6 +6,7 @@ import TopNav from "./components/NavBar.jsx";
 import { handleCorrectJournal } from "./services/api.js";
 import { celebrate } from "./utils/celebrate";
 import AchievementOverlay from "./components/achievements/AchievementOverlay";
+import AmbientBackground from "./components/background/AmbientBackground";
 
 function App() {
   // Seting variables in the App component so the entire application can access them.
@@ -79,6 +80,7 @@ function App() {
   return (
     <div className="App">
       <TopNav />
+      <AmbientBackground />
       <AchievementOverlay achievement={achievement} />
       <Write
         text={journalText}
