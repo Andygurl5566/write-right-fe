@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./App.css";
 import Write from "./pages/Write.jsx";
+import TopNav from "./components/NavBar.jsx";
 import { handleCorrectJournal } from "./services/api.js";
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
 
   return (
     <div className="App">
+      <TopNav />
       <Write
         text={journalText}
         setText={setJournalText}
