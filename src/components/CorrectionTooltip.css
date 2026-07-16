@@ -4,21 +4,22 @@
     top: calc(100% + 12px);
     left: 50%;
 
-   width: 300px;
+    width: 300px;
 
     background: white;
     border-radius: 14px;
     border: 1px solid #e5e7eb;
     box-shadow: 0 12px 30px rgba(0,0,0,.12);
 
-    opacity: 0;
-    visibility: hidden;
+    overflow: visible;
 
     transform: translateX(-50%);
 
     transition:
         opacity .2s ease,
         transform .2s ease;
+
+    z-index: 99999;
 }
 
 .tooltip-header {
@@ -50,16 +51,16 @@
 
     display: flex;
 
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .flashcard-button {
 
-    background: #2563eb;
+    background: #ffffff;
 
-    color: white;
+    color: rgb(0, 0, 0);
 
-    border: none;
+    border: 2px solid #e5e7eb;
 
     border-radius: 8px;
 
@@ -86,6 +87,12 @@
     background: #fef3c7;
     color: #92400e;
 }
+
+.category-badge.other {
+    background: #d8def2;
+    color: #504d50;
+}
+
 .tooltip-correction {
 
     display: flex;
@@ -104,8 +111,12 @@
 .tooltip-original {
 
     text-decoration: line-through;
-
     color: #dc2626;
+}
+.tooltip-incorrect-container {
+    display: flex;         
+    gap: 10px;            
+    align-items: center;
 }
 
 .tooltip-arrow {
@@ -121,6 +132,11 @@
 
     font-weight: 600;
 }
+.tooltip-corrected-container {
+    display: flex;         
+    gap: 10px;            
+    align-items: center;
+}
 
 .tooltip-explanation {
 
@@ -130,10 +146,73 @@
 
     font-size: 15px;
 }
-.correction-wrapper:hover .tooltip-container {
-    opacity: 1;
-    visibility: visible;
-    transform:
-        translateX(-50%)
-        translateY(-5px);
+.correction-wrapper {
+
+    position: relative;
+
+    cursor: pointer;
+}
+
+.incorrect-text,
+.corrected-text {
+
+    transition: .2s;
+}
+
+.incorrect-text:hover,
+.corrected-text:hover {
+
+    transform: translateY(-1px);
+}
+
+/* create the illusion of a tale for the tooltip */
+
+.tooltip-container::after {
+    content: "";
+
+    position: absolute;
+
+    top: -10px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 0;
+    height: 0;
+
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #f8fafc;
+
+    z-index: 2;
+}
+
+.tooltip-container::before {
+    content: "";
+
+    position: absolute;
+
+    top: -11px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 0;
+    height: 0;
+
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    border-bottom: 11px solid #e5e7eb;
+
+    z-index: 1;
+}
+
+.close-icon {
+    color: #dc2626;
+}
+
+.check-icon {
+    color: #16a34a;
 }

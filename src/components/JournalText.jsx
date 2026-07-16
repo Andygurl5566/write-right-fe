@@ -1,10 +1,11 @@
+import { useState, useRef, useEffect } from "react";
 import Correction from "./Correction";
 import CorrectionTooltip from "./CorrectionTooltip";
 import "./JournalText.css";
 
-
-
 function JournalText({ text, corrections, onBack, onCreateFlashcard }) {
+  // State to track the currently selected correction for tooltip display
+  const [selectedCorrection, setSelectedCorrection] = useState(null);
 
   function renderTextWithCorrections() {
     // If there are no mistakes, just display the text
@@ -45,13 +46,18 @@ function JournalText({ text, corrections, onBack, onCreateFlashcard }) {
 
                 Hww → How
             */
-          parts.push(
-            <Correction
-              key={`mistake-${index}`}
-              mistake={mistake}
-              onCreateFlashcard={onCreateFlashcard}
-            />,
-          );
+      parts.push(
+        <Correction
+          key={`mistake-${index}`}
+          mistake={mistake}
+          onCreateFlashcard={onCreateFlashcard}
+          isOpen={selectedCorrection === index}
+          onClose={() => setSelectedCorrection(null)}
+          onClick={() =>
+            setSelectedCorrection(selectedCorrection === index ? null : index)
+          }
+        />,
+      );
 
       /*
                 Move our pointer forward
