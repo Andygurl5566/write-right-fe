@@ -3,6 +3,8 @@ import "./FlashcardStudy.css";
 
 function FlashcardStudy({
   mistakes,
+  corrections,
+  onCreateStudySet,
   onSaveSet,
   savingSet,
   saveMessage,
@@ -22,20 +24,37 @@ function FlashcardStudy({
     setMasteredCount(0);
     setAttempt("");
     setFeedback(null);
-    setStudyStarted(false);
   }, [mistakes]);
 
-  if (!mistakes?.length) {
+  if (!mistakes?.length && !corrections?.length) {
     return null;
   }
 
   if (!studyStarted) {
     return (
       <section className="flashcard-study">
-        <button type="button" className="flashcard-button" onClick={() => setStudyStarted(true)}>
-          ⚔️ Conquer {mistakes.length}{" "}
-          {mistakes.length === 1 ? "Card" : "Cards"}
-        </button>
+        <div className="study-start-actions">
+          {mistakes?.length > 0 && (
+            <button
+              type="button"
+              className="flashcard-button"
+              onClick={() => setStudyStarted(true)}
+            >
+              ⚔️ Conquer {mistakes.length}{" "}
+              {mistakes.length === 1 ? "Card" : "Cards"}
+            </button>
+          )}
+
+          {corrections?.length > 0 && (
+            <button
+              type="button"
+              className="flashcard-button"
+              onClick={handleConquerAll}
+            >
+              ⚔️ Conquer All {corrections.length} Corrections
+            </button>
+          )}
+        </div>
       </section>
     );
   }
@@ -108,6 +127,11 @@ if (queue.length === 0) {
     }
 
     setFeedback("incorrect");
+  }
+
+  function handleConquerAll() {
+    onCreateStudySet();
+    setStudyStarted(true);
   }
 
   return (

@@ -33,6 +33,14 @@ function Write({
     });
   }
 
+  function handleCreateStudySet() {
+  if (!corrections?.length) {
+    return;
+  }
+
+  setFlashcards(corrections);
+  setSaveMessage("");
+}
 
   async function handleSaveFlashcardSet() {
   if (!flashcards.length) {
@@ -100,10 +108,12 @@ function Write({
           />
 
           <FlashcardStudy
-            mistakes={flashcards}
-            onSaveSet={handleSaveFlashcardSet}
-            savingSet={savingSet}
-            saveMessage={saveMessage}
+             mistakes={flashcards}
+             corrections={corrections}
+             onCreateStudySet={handleCreateStudySet}
+             onSaveSet={handleSaveFlashcardSet}
+             savingSet={savingSet}
+             saveMessage={saveMessage}
           />
         </>
       )}

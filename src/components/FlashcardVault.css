@@ -417,3 +417,63 @@
         width:100%;
     }
 }
+
+
+.study-card-container {
+  width: 100%;
+  min-height: 220px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  perspective: 1000px;
+  text-align: inherit;
+}
+
+.study-card-inner {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  transition: transform 0.6s ease;
+  transform-style: preserve-3d;
+}
+
+.study-card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.study-card-face {
+  font-size: 20px;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  padding: 2rem;
+  border: #1118279e 1px solid;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.study-card-front {
+  background: white;
+}
+
+.study-card-back {
+  background: rgb(240, 253, 235);
+  transform: rotateY(180deg);
+}
+
+.study-card-face h3 {
+  margin: 0;
+  text-align: center;
+}
+
+.study-card-hint {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  opacity: 0.65;
+}
