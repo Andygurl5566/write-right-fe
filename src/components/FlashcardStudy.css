@@ -122,3 +122,11 @@ input {
   flex-direction: column;
   gap: 10px
 }
+
+.study-start-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}

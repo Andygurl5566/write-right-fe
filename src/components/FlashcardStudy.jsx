@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 import "./FlashcardStudy.css";
 
-function FlashcardStudy({ mistakes }) {
+function FlashcardStudy({
+  mistakes,
+  corrections,
+  onCreateStudySet,
+  onSaveSet,
+  savingSet,
+  saveMessage,
+}) {
   const [queue, setQueue] = useState([]);
   const [showAnswer, setShowAnswer] = useState(false);
   const [streak, setStreak] = useState(0);
@@ -17,32 +24,66 @@ function FlashcardStudy({ mistakes }) {
     setMasteredCount(0);
     setAttempt("");
     setFeedback(null);
-    setStudyStarted(false);
   }, [mistakes]);
 
-  if (!mistakes?.length) {
+  if (!mistakes?.length && !corrections?.length) {
     return null;
   }
 
   if (!studyStarted) {
     return (
       <section className="flashcard-study">
-        <button type="button" className="flashcard-button" onClick={() => setStudyStarted(true)}>
-          ⚔️ Conquer {mistakes.length}{" "}
-          {mistakes.length === 1 ? "Card" : "Cards"}
-        </button>
+        <div className="study-start-actions">
+          {mistakes?.length > 0 && (
+            <button
+              type="button"
+              className="flashcard-button"
+              onClick={() => setStudyStarted(true)}
+            >
+              ⚔️ Conquer {mistakes.length}{" "}
+              {mistakes.length === 1 ? "Card" : "Cards"}
+            </button>
+          )}
+
+          {corrections?.length > 0 && (
+            <button
+              type="button"
+              className="flashcard-button"
+              onClick={handleConquerAll}
+            >
+              ⚔️ Conquer All {corrections.length} Corrections
+            </button>
+          )}
+        </div>
       </section>
     );
   }
 
-  if (queue.length === 0) {
-    return (
-      <section className="flashcard-study">
-        <h2>All mistakes mastered!</h2>
-        <p>Final streak: {streak}</p>
-      </section>
-    );
-  }
+if (queue.length === 0) {
+  return (
+    <section className="flashcard-study">
+      <h2>All cards mastered!</h2>
+      <p>Final streak: {streak}</p>
+
+      <button
+        type="button"
+        className="flashcard-button"
+        onClick={onSaveSet}
+        disabled={savingSet}
+      >
+        {savingSet
+          ? "Saving..."
+          : "Add Set to Flashcard Vault"}
+      </button>
+
+      {saveMessage && (
+        <p className="flashcard-save-message">
+          {saveMessage}
+        </p>
+      )}
+    </section>
+  );
+}
 
   const currentCard = queue[0];
   const remaining = queue.length;
@@ -86,6 +127,11 @@ function FlashcardStudy({ mistakes }) {
     }
 
     setFeedback("incorrect");
+  }
+
+  function handleConquerAll() {
+    onCreateStudySet();
+    setStudyStarted(true);
   }
 
   return (

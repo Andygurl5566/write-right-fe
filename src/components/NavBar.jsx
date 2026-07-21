@@ -1,26 +1,22 @@
 import "./Navbar.css";
-import TranslateOutlinedIcon from "@mui/icons-material/TranslateOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 import { Stack } from "@mui/material";
 
-function Navbar() {
+function Navbar({ onWriteClick, onFlashcardsClick }) {
   return (
     <nav className="navbar">
-      <div className="navbar-logo">
+      <div className="navbar-logo" onClick={onWriteClick}>
         <span className="logo-icon">✍️</span>
         <span className="logo-text">WriteRight</span>
       </div>
 
-      <span>Write</span>
+      <span onClick={onWriteClick}>Write</span>
       <span>History</span>
-      <span>Flashcards</span>
+      <span onClick={onFlashcardsClick}>Flashcards</span>
 
       <div className="navbar-user">
         <Stack direction="row" spacing={2}>
           <AccountCircleOutlinedIcon fontSize="large" />
-
-          {/* <span>DAD</span> */}
         </Stack>
       </div>
     </nav>

@@ -14,6 +14,8 @@ function Write({
   reviewMode,
 }) {
   const [flashcards, setFlashcards] = useState([]);
+  const [savingSet, setSavingSet] = useState(false);
+  const [saveMessage, setSaveMessage] = useState("");
 
   function handleCreateFlashcard(mistake) {
     setFlashcards((currentCards) => {
@@ -30,6 +32,61 @@ function Write({
       return [...currentCards, mistake];
     });
   }
+
+  function handleCreateStudySet() {
+  if (!corrections?.length) {
+    return;
+  }
+
+  setFlashcards(corrections);
+  setSaveMessage("");
+}
+
+  async function handleSaveFlashcardSet() {
+  if (!flashcards.length) {
+    return;
+  }
+
+  setSavingSet(true);
+  setSaveMessage("");
+
+  const flashcardSet = {
+    name: "Journal Corrections",
+    language: flashcards[0]?.language ?? "Unknown",
+    source_type: "journal",
+    journal_entry_id: null,
+    flashcards: flashcards.map((card) => ({
+      front: card.original,
+      back: card.corrected_text ?? card.corrected,
+      language: card.language ?? null,
+    })),
+  };
+
+  try {
+    const response = await fetch(
+      "http://localhost:8000/flashcard-sets",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(flashcardSet),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Unable to save flashcard set.");
+    }
+
+    setSaveMessage("Flashcard set added to your vault.");
+  } catch (saveError) {
+    console.error(saveError);
+    setSaveMessage("The flashcard set could not be saved.");
+  } finally {
+    setSavingSet(false);
+  }
+}
+
 
   return (
     <>
@@ -50,7 +107,14 @@ function Write({
             onCreateFlashcard={handleCreateFlashcard}
           />
 
-          <FlashcardStudy mistakes={flashcards} />
+          <FlashcardStudy
+             mistakes={flashcards}
+             corrections={corrections}
+             onCreateStudySet={handleCreateStudySet}
+             onSaveSet={handleSaveFlashcardSet}
+             savingSet={savingSet}
+             saveMessage={saveMessage}
+          />
         </>
       )}
     </>
