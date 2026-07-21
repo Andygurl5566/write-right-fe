@@ -12,6 +12,7 @@ function Write({
   onBack,
   error,
   reviewMode,
+  setTargetLanguage
 }) {
   const [flashcards, setFlashcards] = useState([]);
   const [savingSet, setSavingSet] = useState(false);
@@ -97,6 +98,7 @@ function Write({
           onAnalyze={onAnalyze}
           loading={loading}
           error={error}
+          setTargetLanguage={setTargetLanguage}
         />
       ) : (
         <>

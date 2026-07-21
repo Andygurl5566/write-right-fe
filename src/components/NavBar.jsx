@@ -1,8 +1,9 @@
 import "./Navbar.css";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Stack } from "@mui/material";
+import LanguageSelectionDropdown from "./LanguageSelectionDropdown";
 
-function Navbar({ onWriteClick, onFlashcardsClick }) {
+function Navbar({ onWriteClick, onFlashcardsClick, setNativeLanguage }) {
   return (
     <nav className="navbar">
       <div className="navbar-logo" onClick={onWriteClick}>
@@ -17,6 +18,7 @@ function Navbar({ onWriteClick, onFlashcardsClick }) {
       <div className="navbar-user">
         <Stack direction="row" spacing={2}>
           <AccountCircleOutlinedIcon fontSize="large" />
+          <LanguageSelectionDropdown onChange={setNativeLanguage} displayText={"Native Language"}/>
         </Stack>
       </div>
     </nav>
