@@ -39,6 +39,10 @@ function App() {
   // Win condition celebration
   const [achievement, setAchievement] = useState(null);
 
+  const [nativeLanguage, setNativeLanguage] = useState("");
+
+  const [targetLanguage, setTargetLanguage] = useState("");
+
   // --------------------------------------------------------------
   // Helper functions
   // --------------------------------------------------------------
@@ -56,7 +60,11 @@ function App() {
     setApiError("");
 
     try {
-      const response = await handleCorrectJournal(journalText);
+      const response = await handleCorrectJournal(
+        journalText,
+        nativeLanguage,
+        targetLanguage,
+      );
 
       console.log("Backend response:", response);
 
@@ -78,9 +86,7 @@ function App() {
       }
     } catch (err) {
       console.error(err);
-      setApiError(
-        "Something went wrong while analyzing your journal."
-      );
+      setApiError("Something went wrong while analyzing your journal.");
     } finally {
       setLoading(false);
     }
@@ -96,10 +102,11 @@ function App() {
 
   return (
     <div className="App">
-   <TopNav
-      onWriteClick={() => setCurrentView("write")}
-      onFlashcardsClick={() => setCurrentView("flashcards")}
-    />
+      <TopNav
+        onWriteClick={() => setCurrentView("write")}
+        onFlashcardsClick={() => setCurrentView("flashcards")}
+        setNativeLanguage={setNativeLanguage}
+      />
 
       <AchievementOverlay achievement={achievement} />
 
@@ -115,6 +122,7 @@ function App() {
           onBack={returnToEditor}
           error={apiError}
           reviewMode={reviewMode}
+          setTargetLanguage={setTargetLanguage}
         />
       )}
     </div>
