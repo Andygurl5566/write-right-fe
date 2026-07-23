@@ -39,7 +39,13 @@ function Navbar({ setNativeLanguage }) {
 
       <DropDownMenu
         icon={
-          <AccountCircleOutlinedIcon className="navbar-user" fontSize="large" />
+          <AccountCircleOutlinedIcon
+            className="navbar-user"
+            fontSize="large"
+            sx={{
+              color: "#555555",
+            }}
+          />
         }
         menuOptions={["My Profile", "Account", "Logout"]}
       />

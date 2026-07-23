@@ -1,20 +1,14 @@
 .navbar {
     height: 72px;
     position: sticky;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     padding: 0 70px;
-
     background: white;
-
     border-bottom: 1px solid #e5e7eb;
-
-   
     top: 0;
-
+    /* needed so nav can float above flashcards etc */
     z-index: 99999999;
     isolation: isolate;
     
@@ -48,12 +42,8 @@
 /* ---------- Right ---------- */
 
 .navbar-user {
-
-    /* display: flex; */
     align-items: center;
-    /* gap: 10px; */
     cursor: pointer;
-    /* border-radius: 12px; */
     transition: .2s;
     color: #1b0c34;
 }
@@ -61,15 +51,6 @@
 .navbar-user:hover {
     color:#6d28d9;
 }
-.navbar-user:active {
-    color:#6d28d9;
-    /* background: #f3f4f6; */
-}
-
-/* .navbar-user span {
-    font-weight: 500;
-    color: #374151;
-} */
 
 .nav-item {
   color: #555;

@@ -2,13 +2,17 @@ import React from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import "./DropDownMenu.css";
 
+// This component accepts an icon and menuOptions. MenuOptions can be a list of
 function DropDownMenu({ icon, menuOptions = [] }) {
   const id = React.useId();
   const buttonId = `${id}-button`;
   const menuId = `${id}-menu`;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  // manage opening and closing menu
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -21,9 +25,7 @@ function DropDownMenu({ icon, menuOptions = [] }) {
     const handleResize = () => {
       setAnchorEl(null);
     };
-
     window.addEventListener("resize", handleResize);
-
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -41,6 +43,7 @@ function DropDownMenu({ icon, menuOptions = [] }) {
         {icon}
       </Button>
       <Menu
+        className="drop-down-menu"
         id={menuId}
         anchorEl={anchorEl}
         open={open}
@@ -61,7 +64,19 @@ function DropDownMenu({ icon, menuOptions = [] }) {
         }}
       >
         {menuOptions.map((menuItem) => (
-          <MenuItem key={menuItem} onClick={handleClose}>
+          <MenuItem
+            className="drop-down-menu-item"
+            key={menuItem}
+            onClick={handleClose}
+            sx={{
+              color: "#555555",
+              "&:hover": {
+                color: "#5555",
+                backgroundColor: "#6d28d9",
+                color: "white",
+              },
+            }}
+          >
             {menuItem}
           </MenuItem>
         ))}
