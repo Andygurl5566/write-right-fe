@@ -1,9 +1,9 @@
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 import LanguageSelectionDropdown from "./LanguageSelectionDropdown";
 import DropDownMenu from "./DropDownMenu";
+
 import "./Navbar.css";
 
 function Navbar({ setNativeLanguage }) {
@@ -15,7 +15,7 @@ function Navbar({ setNativeLanguage }) {
       </Stack>
 
       <NavLink
-        to="/write"
+        to="/"
         className={({ isActive }) =>
           isActive ? "nav-item active" : "nav-item"
         }
@@ -31,24 +31,7 @@ function Navbar({ setNativeLanguage }) {
       >
         Flashcards
       </NavLink>
-
-      {/* <LanguageSelectionDropdown
-        onChange={setNativeLanguage}
-        displayText="Native Language"
-      /> */}
-
-      <DropDownMenu
-        icon={
-          <AccountCircleOutlinedIcon
-            className="navbar-user"
-            fontSize="large"
-            sx={{
-              color: "#555555",
-            }}
-          />
-        }
-        menuOptions={["My Profile", "Account", "Logout"]}
-      />
+      <DropDownMenu setNativeLanguage={setNativeLanguage} />
     </div>
   );
 }

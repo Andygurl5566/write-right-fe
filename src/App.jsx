@@ -33,9 +33,11 @@ function App() {
   // Win condition celebration
   const [achievement, setAchievement] = useState(null);
 
-  const [nativeLanguage, setNativeLanguage] = useState("");
+  // Sets the users native language
+  const [nativeLanguage, setNativeLanguage] = useState("english");
 
-  const [targetLanguage, setTargetLanguage] = useState("");
+  // Sets the users target language
+  const [targetLanguage, setTargetLanguage] = useState("english");
 
   // --------------------------------------------------------------
   // Helper functions
@@ -100,7 +102,7 @@ function App() {
       <AchievementOverlay achievement={achievement} />
       <Routes>
         <Route
-          path="/write"
+          path="/"
           element={
             <Write
               text={journalText}
