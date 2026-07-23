@@ -1,4 +1,4 @@
-.navbar {
+/* .navbar {
     height: 72px;
     position: sticky;
 
@@ -18,7 +18,7 @@
     z-index: 99999999;
     isolation: isolate;
     
-}
+} */
 
 /* ---------- Left ---------- */
 
@@ -43,29 +43,6 @@
     letter-spacing: -.5px;
 }
 
-/* ---------- Center ---------- */
-
-/* .navbar-links {
-
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    padding: 10px 16px;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 999px;
-
-    cursor: pointer;
-
-    transition: .2s;
-} */
-
-.navbar-links:hover {
-
-    background: #c9caca;
-}
 
 /* ---------- Right ---------- */
 
@@ -96,3 +73,22 @@
     color: #374151;
 }
 
+.nav-item {
+  color: #555;
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Hover effect */
+.nav-item:hover {
+  background-color: #f3f4f6;
+  color: #000;
+}
+
+/* Current page */
+.nav-item.active {
+  background-color: #526284;
+  color: white;
+}

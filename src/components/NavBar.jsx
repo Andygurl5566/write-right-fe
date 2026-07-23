@@ -1,27 +1,48 @@
-import "./Navbar.css";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Stack } from "@mui/material";
+import { NavLink } from "react-router-dom";
+
 import LanguageSelectionDropdown from "./LanguageSelectionDropdown";
+import "./Navbar.css";
 
-function Navbar({ onWriteClick, onFlashcardsClick, setNativeLanguage }) {
+function Navbar({ setNativeLanguage }) {
   return (
-    <nav className="navbar">
-      <div className="navbar-logo" onClick={onWriteClick}>
-        <span className="logo-icon">✍️</span>
-        <span className="logo-text">WriteRight</span>
-      </div>
+    <div className="navbar">
+      <Stack direction="row" spacing={10}>
+        <NavLink to="/write" className="navbar-logo">
+          <span className="logo-icon">✍️</span>
+          <span className="logo-text">WriteRight</span>
+        </NavLink>
 
-      <span onClick={onWriteClick}>Write</span>
-      <span>History</span>
-      <span onClick={onFlashcardsClick}>Flashcards</span>
+      
+          <NavLink
+            to="/write"
+            className={({ isActive }) =>
+              isActive ? "nav-item active" : "nav-item"
+            }
+          >
+            Write
+          </NavLink>
+          
+          <NavLink
+            to="/flashcards"
+            className={({ isActive }) =>
+              isActive ? "nav-item active" : "nav-item"
+            }
+          >
+            Flashcards
+          </NavLink>
+        
 
-      <div className="navbar-user">
-        <Stack direction="row" spacing={2}>
+        <Stack className="navbar-user" direction="row" spacing={2}>
           <AccountCircleOutlinedIcon fontSize="large" />
-          <LanguageSelectionDropdown onChange={setNativeLanguage} displayText={"Native Language"}/>
+          <LanguageSelectionDropdown
+            onChange={setNativeLanguage}
+            displayText="Native Language"
+          />
         </Stack>
-      </div>
-    </nav>
+      </Stack>
+    </div>
   );
 }
 

@@ -1,22 +1,16 @@
 import { useState } from "react";
-import "./App.css";
-import Write from "./pages/Write.jsx";
+import { Routes, Route } from "react-router-dom";
+
 import TopNav from "./components/NavBar.jsx";
-import FlashcardVault from "./components/FlashcardVault.jsx";
-import { handleCorrectJournal } from "./services/api.js";
-import { celebrate } from "./utils/celebrate";
+import Write from "./pages/Write.jsx";
+import FlashcardReviewPage from "./pages/FlashcardReviewPage.jsx";
 import AchievementOverlay from "./components/achievements/AchievementOverlay";
 
+import { handleCorrectJournal } from "./services/api.js";
+import { celebrate } from "./utils/celebrate";
+import "./App.css";
+
 function App() {
-  // --------------------------------------------------------------
-  // Navigation
-  // --------------------------------------------------------------
-
-  // Controls which page is currently displayed.
-  // "write" = journal workflow
-  // "flashcards" = Flashcard Vault
-  const [currentView, setCurrentView] = useState("write");
-
   // --------------------------------------------------------------
   // Journal State
   // --------------------------------------------------------------
@@ -102,29 +96,27 @@ function App() {
 
   return (
     <div className="App">
-      <TopNav
-        onWriteClick={() => setCurrentView("write")}
-        onFlashcardsClick={() => setCurrentView("flashcards")}
-        setNativeLanguage={setNativeLanguage}
-      />
-
+      <TopNav setNativeLanguage={setNativeLanguage} />
       <AchievementOverlay achievement={achievement} />
-
-      {currentView === "flashcards" ? (
-        <FlashcardVault />
-      ) : (
-        <Write
-          text={journalText}
-          setText={setJournalText}
-          onAnalyze={analyzeJournal}
-          loading={loading}
-          corrections={corrections}
-          onBack={returnToEditor}
-          error={apiError}
-          reviewMode={reviewMode}
-          setTargetLanguage={setTargetLanguage}
+      <Routes>
+        <Route
+          path="/write"
+          element={
+            <Write
+              text={journalText}
+              setText={setJournalText}
+              onAnalyze={analyzeJournal}
+              loading={loading}
+              corrections={corrections}
+              onBack={returnToEditor}
+              error={apiError}
+              reviewMode={reviewMode}
+              setTargetLanguage={setTargetLanguage}
+            />
+          }
         />
-      )}
+        <Route path="/flashcards" element={<FlashcardReviewPage />} />
+      </Routes>
     </div>
   );
 }
