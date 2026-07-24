@@ -16,6 +16,7 @@ function FlashcardStudy({
   const [attempt, setAttempt] = useState("");
   const [feedback, setFeedback] = useState(null);
   const [studyStarted, setStudyStarted] = useState(false);
+  const [mistakeCount, setMistakeCount] = useState(0);
 
   useEffect(() => {
     setQueue(mistakes ?? []);
@@ -24,6 +25,7 @@ function FlashcardStudy({
     setMasteredCount(0);
     setAttempt("");
     setFeedback(null);
+    setMistakeCount(0);
   }, [mistakes]);
 
   if (!mistakes?.length && !corrections?.length) {
@@ -60,30 +62,56 @@ function FlashcardStudy({
   }
 
 if (queue.length === 0) {
+  const perfectSession = mistakeCount === 0;
+
   return (
     <section className="flashcard-study">
-      <h2>All cards mastered!</h2>
-      <p>Final streak: {streak}</p>
+      <article className="completion-card">
+        <div
+          className={`completion-card-inner ${
+            perfectSession
+              ? "completion-card-perfect"
+              : "completion-card-standard"
+          }`}
+        >
+          <div className="completion-card-front">
+            <h2>Final card conquered!</h2>
+          </div>
 
-      <button
-        type="button"
-        className="flashcard-button"
-        onClick={onSaveSet}
-        disabled={savingSet}
-      >
-        {savingSet
-          ? "Saving..."
-          : "Add Set to Flashcard Vault"}
-      </button>
+          <div className="completion-card-back">
+            <h2>
+              {perfectSession
+                ? "You Crushed It!"
+                : "All cards mastered!"}
+            </h2>
 
-      {saveMessage && (
-        <p className="flashcard-save-message">
-          {saveMessage}
-        </p>
-      )}
+            <p>Cards mastered: {masteredCount}</p>
+            <p>Mistakes made: {mistakeCount}</p>
+            <p>Final streak: {streak}</p>
+
+            <button
+              type="button"
+              className="flashcard-button"
+              onClick={onSaveSet}
+              disabled={savingSet}
+            >
+              {savingSet
+                ? "Saving..."
+                : "Add Set to Flashcard Vault"}
+            </button>
+
+            {saveMessage && (
+              <p className="flashcard-save-message">
+                {saveMessage}
+              </p>
+            )}
+          </div>
+        </div>
+      </article>
     </section>
   );
 }
+
 
   const currentCard = queue[0];
   const remaining = queue.length;
@@ -125,7 +153,8 @@ if (queue.length === 0) {
       setFeedback("correct");
       return;
     }
-
+    setMistakeCount((count) => count + 1);
+    setStreak(0);
     setFeedback("incorrect");
   }
 
