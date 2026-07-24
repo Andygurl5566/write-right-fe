@@ -1,27 +1,38 @@
-import "./Navbar.css";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Stack } from "@mui/material";
-import LanguageSelectionDropdown from "./LanguageSelectionDropdown";
+import { NavLink } from "react-router-dom";
 
-function Navbar({ onWriteClick, onFlashcardsClick, setNativeLanguage }) {
+import LanguageSelectionDropdown from "./LanguageSelectionDropdown";
+import DropDownMenu from "./DropDownMenu";
+
+import "./Navbar.css";
+
+function Navbar({ setNativeLanguage }) {
   return (
-    <nav className="navbar">
-      <div className="navbar-logo" onClick={onWriteClick}>
+    <div className="navbar">
+      <Stack direction="row" spacing={2}>
         <span className="logo-icon">✍️</span>
         <span className="logo-text">WriteRight</span>
-      </div>
+      </Stack>
 
-      <span onClick={onWriteClick}>Write</span>
-      <span>History</span>
-      <span onClick={onFlashcardsClick}>Flashcards</span>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          isActive ? "nav-item active" : "nav-item"
+        }
+      >
+        Write
+      </NavLink>
 
-      <div className="navbar-user">
-        <Stack direction="row" spacing={2}>
-          <AccountCircleOutlinedIcon fontSize="large" />
-          <LanguageSelectionDropdown onChange={setNativeLanguage} displayText={"Native Language"}/>
-        </Stack>
-      </div>
-    </nav>
+      <NavLink
+        to="/flashcards"
+        className={({ isActive }) =>
+          isActive ? "nav-item active" : "nav-item"
+        }
+      >
+        Flashcards
+      </NavLink>
+      <DropDownMenu setNativeLanguage={setNativeLanguage} />
+    </div>
   );
 }
 

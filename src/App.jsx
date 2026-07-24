@@ -1,22 +1,16 @@
 import { useState } from "react";
-import "./App.css";
-import Write from "./pages/Write.jsx";
+import { Routes, Route } from "react-router-dom";
+
 import TopNav from "./components/NavBar.jsx";
-import FlashcardVault from "./components/FlashcardVault.jsx";
-import { handleCorrectJournal } from "./services/api.js";
-import { celebrate } from "./utils/celebrate";
+import Write from "./pages/Write.jsx";
+import FlashcardReviewPage from "./pages/FlashcardReviewPage.jsx";
 import AchievementOverlay from "./components/achievements/AchievementOverlay";
 
+import { handleCorrectJournal } from "./services/api.js";
+import { celebrate } from "./utils/celebrate";
+import "./App.css";
+
 function App() {
-  // --------------------------------------------------------------
-  // Navigation
-  // --------------------------------------------------------------
-
-  // Controls which page is currently displayed.
-  // "write" = journal workflow
-  // "flashcards" = Flashcard Vault
-  const [currentView, setCurrentView] = useState("write");
-
   // --------------------------------------------------------------
   // Journal State
   // --------------------------------------------------------------
@@ -39,9 +33,11 @@ function App() {
   // Win condition celebration
   const [achievement, setAchievement] = useState(null);
 
-  const [nativeLanguage, setNativeLanguage] = useState("");
+  // Sets the users native language
+  const [nativeLanguage, setNativeLanguage] = useState("english");
 
-  const [targetLanguage, setTargetLanguage] = useState("");
+  // Sets the users target language
+  const [targetLanguage, setTargetLanguage] = useState("english");
 
   const [journalTitle, setJournalTitle] = useState("Untitled Journal");
 
@@ -61,9 +57,7 @@ function App() {
     const trimmedTitle = journalTitle.trim();
 
     if (!trimmedTitle || trimmedTitle === "Untitled Journal") {
-      window.alert(
-        "Please rename your journal before analyzing your writing."
-      );
+      window.alert("Please rename your journal before analyzing your writing.");
       return;
     }
 
@@ -113,31 +107,29 @@ function App() {
 
   return (
     <div className="App">
-      <TopNav
-        onWriteClick={() => setCurrentView("write")}
-        onFlashcardsClick={() => setCurrentView("flashcards")}
-        setNativeLanguage={setNativeLanguage}
-      />
-
+      <TopNav setNativeLanguage={setNativeLanguage} />
       <AchievementOverlay achievement={achievement} />
-
-      {currentView === "flashcards" ? (
-        <FlashcardVault />
-      ) : (
-        <Write
-          text={journalText}
-          setText={setJournalText}
-          onAnalyze={analyzeJournal}
-          journalTitle={journalTitle}
-          setJournalTitle={setJournalTitle}
-          loading={loading}
-          corrections={corrections}
-          onBack={returnToEditor}
-          error={apiError}
-          reviewMode={reviewMode}
-          setTargetLanguage={setTargetLanguage}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Write
+              text={journalText}
+              setText={setJournalText}
+              onAnalyze={analyzeJournal}
+              journalTitle={journalTitle}
+              setJournalTitle={setJournalTitle}
+              loading={loading}
+              corrections={corrections}
+              onBack={returnToEditor}
+              error={apiError}
+              reviewMode={reviewMode}
+              setTargetLanguage={setTargetLanguage}
+            />
+          }
         />
-      )}
+        <Route path="/flashcards" element={<FlashcardReviewPage />} />
+      </Routes>
     </div>
   );
 }

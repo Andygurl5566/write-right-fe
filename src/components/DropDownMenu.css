@@ -1,0 +1,14 @@
+.drop-down-menu {
+  top: 10px;
+  right: 20px;
+}
+
+.drop-down-menu-item:hover{
+    background-color: #6d28d9;
+    color: aliceblue;
+}
+
+.drop-down-menu-item{
+    background-color: #6d28d9;
+    color: rgb(23, 99, 166);
+}
