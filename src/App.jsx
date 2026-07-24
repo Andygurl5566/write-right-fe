@@ -5,6 +5,7 @@ import TopNav from "./components/NavBar.jsx";
 import Write from "./pages/Write.jsx";
 import FlashcardReviewPage from "./pages/FlashcardReviewPage.jsx";
 import AchievementOverlay from "./components/achievements/AchievementOverlay";
+import DictionaryModal from "./components/DictionaryModal.jsx";
 
 import { handleCorrectJournal } from "./services/api.js";
 import { celebrate } from "./utils/celebrate";
@@ -32,6 +33,9 @@ function App() {
 
   // Win condition celebration
   const [achievement, setAchievement] = useState(null);
+
+  // Dictionary modal state
+  const [dictionaryOpen, setDictionaryOpen] = useState(false);
 
   // Sets the users native language
   const [nativeLanguage, setNativeLanguage] = useState("english");
@@ -98,8 +102,9 @@ function App() {
 
   return (
     <div className="App">
-      <TopNav setNativeLanguage={setNativeLanguage} />
+      <TopNav setNativeLanguage={setNativeLanguage}  onOpenDictionary={() => setDictionaryOpen(true)}/>
       <AchievementOverlay achievement={achievement} />
+      <DictionaryModal isOpen={dictionaryOpen} onClose={() => setDictionaryOpen(false)} nativeLanguage={nativeLanguage} targetLanguage={targetLanguage}/>
       <Routes>
         <Route
           path="/"
