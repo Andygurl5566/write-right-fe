@@ -2,15 +2,16 @@
   position: fixed;
   inset: 0;
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
   align-items: flex-start;
   padding: 70px 20px 20px;
   background: rgba(15, 23, 42, 0.248);
-
+  pointer-events: none;
   z-index: 999;
   overflow-y: auto;
   animation: fadeIn .2s ease;
 }
+
 
 .dictionary-modal {
   width: min(900px, 92vw);
@@ -24,6 +25,7 @@
   padding: 32px;
   margin: 30px;
   animation: slideUp .25s ease;
+  pointer-events: auto;
 }
 
 .dictionary-modal-header {
@@ -212,4 +214,40 @@
     opacity:1;
     transform:translateY(0) scale(1);
   }
+}
+
+.dictionary-suggestion {
+  margin-bottom: 14px;
+  padding: 12px 16px;
+
+  border: 1px solid #c7d2fe;
+  border-radius: 12px;
+
+  background: linear-gradient(
+    135deg,
+    #eef2ff,
+    #f5f3ff
+  );
+
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.dictionary-suggestion-word {
+  padding: 0;
+
+  border: none;
+  border-bottom: 1px solid currentColor;
+
+  background: transparent;
+  color: #4338ca;
+
+  font: inherit;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.dictionary-suggestion-word:hover {
+  color: #6d28d9;
 }

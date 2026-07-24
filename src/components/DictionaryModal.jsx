@@ -56,6 +56,10 @@ function formatLanguageName(language = "") {
   return language.charAt(0).toUpperCase() + language.slice(1);
 }
 
+function normalizeWord(word = "") {
+  return word.trim().toLocaleLowerCase();
+}
+
 function DictionaryModal({
   isOpen,
   onClose,
@@ -98,35 +102,36 @@ function DictionaryModal({
     return null;
   }
 
-  async function translateWord(word) {
-    const response = await fetch(`${API_BASE_URL}/translate`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        text: word,
-        source_language: selectedNativeLanguage,
-        target_language: selectedTargetLanguage,
-      }),
-    });
+async function translateWord(word) {
+  const response = await fetch(`${API_BASE_URL}/translate`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      text: word,
+      source_language: selectedNativeLanguage,
+      target_language: selectedTargetLanguage,
+    }),
+  });
 
-    if (!response.ok) {
-      throw new Error("The word could not be translated.");
-    }
-
-    const data = await response.json();
-
-    if (!data.translation) {
-      throw new Error("No translation was returned.");
-    }
-
-    return {
-      translation: data.translation,
-      partOfSpeech: data.part_of_speech || "",
-      originalText: word,
-    };
+  if (!response.ok) {
+    throw new Error("The word could not be translated.");
   }
+
+  const data = await response.json();
+
+  if (!data.translation) {
+    throw new Error("No translation was returned.");
+  }
+
+  return {
+    translation: data.translation,
+    partOfSpeech: data.part_of_speech || "",
+    originalText: data.original_text || word,
+    interpretedText: data.interpreted_text || word,
+  };
+}
 
   async function lookUpDefinition(word) {
     const languageCode =
@@ -200,17 +205,20 @@ function DictionaryModal({
     selectedTargetLanguage,
   );
 
+const spellingWasCorrected =
+  translationResult &&
+  normalizeWord(translationResult.originalText) !==
+    normalizeWord(translationResult.interpretedText);
+
   return (
     <div
       className="dictionary-modal-overlay"
-      onClick={onClose}
     >
       <section
         className="dictionary-modal"
         role="dialog"
-        aria-modal="true"
+        aria-modal="false"
         aria-labelledby="dictionary-title"
-        onClick={(event) => event.stopPropagation()}
       >
         <div className="dictionary-modal-header">
           <div>
@@ -283,7 +291,27 @@ function DictionaryModal({
           )}
 
         {translationResult && (
-          <div className="dictionary-results">
+            <div className="dictionary-results">
+                {spellingWasCorrected && (
+                <div
+                    className="dictionary-suggestion"
+                    role="status"
+                >
+                    Did you mean{" "}
+                    <button
+                    type="button"
+                    className="dictionary-suggestion-word"
+                    onClick={() =>
+                        setSearchTerm(
+                        translationResult.interpretedText,
+                        )
+                    }
+                    >
+                    {translationResult.interpretedText}
+                    </button>
+                    ?
+                </div>
+                )}
             <div className="dictionary-translation-result">
               <h3>{translationResult.translation}</h3>
 
@@ -292,7 +320,7 @@ function DictionaryModal({
                 {translationResult.partOfSpeech
                   ? ` ${translationResult.partOfSpeech}`
                   : " word"}{" "}
-                for “{translationResult.originalText}”
+                for “{translationResult.interpretedText}”
               </p>
             </div>
 
