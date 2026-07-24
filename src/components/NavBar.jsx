@@ -1,12 +1,12 @@
 import { Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
-import LanguageSelectionDropdown from "./LanguageSelectionDropdown";
+// import LanguageSelectionDropdown from "./LanguageSelectionDropdown";
 import DropDownMenu from "./DropDownMenu";
 
 import "./Navbar.css";
 
-function Navbar({ setNativeLanguage }) {
+function Navbar({ setNativeLanguage, onOpenDictionary }) {
   return (
     <div className="navbar">
       <Stack direction="row" spacing={2}>
@@ -31,7 +31,7 @@ function Navbar({ setNativeLanguage }) {
       >
         Flashcards
       </NavLink>
-      <DropDownMenu setNativeLanguage={setNativeLanguage} />
+      <DropDownMenu setNativeLanguage={setNativeLanguage} onOpenDictionary={onOpenDictionary} />
     </div>
   );
 }
