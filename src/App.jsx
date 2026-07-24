@@ -43,6 +43,8 @@ function App() {
 
   const [targetLanguage, setTargetLanguage] = useState("");
 
+  const [journalTitle, setJournalTitle] = useState("Untitled Journal");
+
   // --------------------------------------------------------------
   // Helper functions
   // --------------------------------------------------------------
@@ -53,6 +55,15 @@ function App() {
     // Prevent empty submissions
     if (!journalText.trim()) {
       setApiError("Please enter some text first.");
+      return;
+    }
+
+    const trimmedTitle = journalTitle.trim();
+
+    if (!trimmedTitle || trimmedTitle === "Untitled Journal") {
+      window.alert(
+        "Please rename your journal before analyzing your writing."
+      );
       return;
     }
 
@@ -117,6 +128,8 @@ function App() {
           text={journalText}
           setText={setJournalText}
           onAnalyze={analyzeJournal}
+          journalTitle={journalTitle}
+          setJournalTitle={setJournalTitle}
           loading={loading}
           corrections={corrections}
           onBack={returnToEditor}
